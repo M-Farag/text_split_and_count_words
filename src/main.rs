@@ -1,5 +1,5 @@
 use std::io;
-use crate::text_processor::{split,words_counter};
+use crate::text_processor::*;
 
 pub mod text_processor;
 fn main() {
@@ -7,14 +7,22 @@ fn main() {
     println!("Please input your text ?!");
 
     io::stdin().read_line(&mut user_input).expect("Err reading buffer");
+
+    // Clean text
+    let user_input = character_replacer(user_input, (',',' '));
+    let user_input = character_replacer(user_input, ('.',' '));
+    let user_input = character_replacer(user_input, ('?',' '));
+    let user_input = character_replacer(user_input, ('"',' '));
+
+    // Segment text into words
     let words = split(user_input.trim());
 
+    // Count words
     let words_count = words_counter(words);
 
-    println!("Word  count");
     for (word, count) in words_count
     {
-        println!("{}    {}",word,count);
+        println!("Word: {}, Count: {}",word,count);
     }
 }
 

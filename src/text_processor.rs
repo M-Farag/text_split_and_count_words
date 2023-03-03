@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, char};
 
 pub fn split(text_input:&str) ->Vec<&str>
 {
@@ -25,4 +25,20 @@ pub fn words_counter(words:Vec<&str>) -> HashMap<&str,usize>
         *counter += 1;
     }
     words_count
+}
+
+pub fn character_replacer(user_input:String,replacements:(char,char)) -> String
+{
+    let mut new_string:String = String::new();
+
+    for mut letter in user_input.chars()
+    {
+        if letter == replacements.0
+        {
+            letter = replacements.1
+        }
+        new_string.push(letter);
+    }
+
+    new_string
 }
